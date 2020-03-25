@@ -1,13 +1,21 @@
-defaultEntryPoints = ["http"]
-
 [entryPoints]
   [entryPoints.http]
   address = ":80"
   [entryPoints.https]
   address = ":443"
+  [entryPoints.mysql]
+  address = ":3306"
+  [entryPoints.mailhog]
+  address = ":8025"
 
-[docker]
-domain = "localhost"
-endpoint = "unix:///var/run/docker.sock"
-exposedByDefault = false
-watch = true
+[providers]
+  [providers.docker]
+    endpoint = "unix:///var/run/docker.sock"
+    watch = true
+    exposedByDefault = true
+    swarmMode = false
+
+[api]
+  dashboard = true
+  debug = false
+  insecure = true
